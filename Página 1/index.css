@@ -1,0 +1,79 @@
+body{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 15% 42.5% 42.5%;
+    height: 100vh;
+    background: linear-gradient(to left, gray, rgb(17, 16, 16)); /* Gradiente de azul à direita para branco à esquerda */
+            height: 100vh; /* Faz com que o gradiente cubra toda a altura da janela */
+            margin: 0; /* Remove a margem padrão do corpo */
+}
+
+#principal{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column: 2;
+    grid-row: 2;
+    border:2px black;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra com deslocamento de 10px vertical, 20px de borrão, cor preta semi-transparente */
+            border-radius: 10px; /* Cantos arredondados */
+}
+
+#usuario{
+    align-self: center;
+    justify-self: center;
+    grid-column: 2;
+    grid-row: 1;
+    border-radius: 3px;
+
+}
+
+#labelUsuario{
+    justify-self: center;
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 10px;
+    color: white;
+}
+
+#senha{
+    align-self: center
+    ;
+    justify-self: center;
+    grid-column: 2;
+    grid-row: 2;
+    border-radius: 3px;
+
+}
+
+#labelSenha{
+/*Display stuff*/
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
+/*Box model stuff*/
+    margin-top: 10px;
+/*Typography stuff*/
+    color: white;
+
+}
+
+#buttonEnviar{
+    align-self: center;
+    justify-self: center;
+    grid-column: 2;
+    grid-row: 3;
+}
+
+#buttonCadastrar{
+/*Display stuff*/
+    grid-column: 2;
+    grid-row: 3;
+    justify-self:center ;
+/*Box model stuff*/
+    width: 150px;
+    height: 20px;
+    margin-top:5px ;
+    border-radius: 3px;
+}
