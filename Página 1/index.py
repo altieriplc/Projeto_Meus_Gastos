@@ -1,62 +1,20 @@
-from flask import Flask, render_template, request, jsonify
-import mysql.connector
-import logging
+import sqlalchemy
+from sqlalchemy.orm import declarative_base, Session
+from sqlalchemy import Column, String, Integer, ForeignKey
 
-app = Flask(__name__)
+Base = declarative_base() # Base = estrutura modelo que vai ser utilizada para criar as classes da aplicação
+                            # declarative_base: É uma função que retorna uma classe base especial do SQLAlchemy chamada DeclarativeMeta. Esta classe base é utilizada para criar classes de mapeamento de objetos (ORM) que representam tabelas no banco de dados. Ela permite definir estruturas de dados Python que são automaticamente mapeadas para tabelas no banco de dados, facilitando a interação entre objetos Python e dados persistidos em um banco de dados relacional.
 
-# Configurando logging
-logging.basicConfig(level=logging.DEBUG)
-
-# Conectar ao banco de dados MySQL (substitua as informações com as suas)
-mydb = mysql.connector.connect(
-    host="roundhouse.proxy.rlwy.net",
-    user="root",
-    password="iRbSpeeGcmSPdDoHaVHGekOPGTSEGVdo",
-    database="railway"
-)
-
-# Rota para a página inicial
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-# Rota para cadastrar usuário
-@app.route('/cadastrar', methods=['POST'])
-def cadastrar():
-    app.logger.debug('Recebida uma requisição POST para /cadastrar')
-    data = request.get_json()
-    app.logger.debug(f'Requisição JSON recebida: {data}')
+class User(Base):
+    __tablename__ = 'user_account' # __tablename__ não é uma função, mas sim uma convenção
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    fullname = Column(String(100))
     
-    usuario = data.get('usuario')
-    senha = data.get('senha')
-    app.logger.debug(f'Usuário: {usuario}, Senha: {senha}')
-
-    # Criar cursor para executar comandos SQL
-    mycursor = mydb.cursor()
-
-    # Comando SQL para inserir dados
-    sql = "INSERT INTO usuarios (usuario, senha) VALUES (%s, %s)"
-    val = (usuario, senha)
-
-    try:
-        # Executar o comando SQL
-        mycursor.execute(sql, val)
-        app.logger.debug('Comando SQL executado com sucesso')
-
-        # Commit para salvar as mudanças no banco de dados
-        mydb.commit()
-        app.logger.debug('Commit realizado')
-
-        return jsonify({'message': 'Usuário cadastrado com sucesso!'}), 200
-    except mysql.connector.Error as err:
-        # Se ocorrer um erro, desfazer a operação e retornar uma mensagem de erro
-        mydb.rollback()
-        app.logger.error(f'Erro ao cadastrar usuário: {err}')
-        return jsonify({'error': f'Erro ao cadastrar usuário: {err}'}), 500
-    finally:
-        # Fechar o cursor
-        mycursor.close()
-        app.logger.debug('Cursor fechado')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    
+class Addres(Base):
+    __tablename__ = 'user_address'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    email_address = Column(String(50), nullable=False)
+    user_id = Column(Integer, ForeignKey("user_account.id"), nullable=False) # address precisa estar linkado a algum usuário
+    
