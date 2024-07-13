@@ -9,16 +9,27 @@
 
 <body>
 
-    <form id="principal">
-        <label for="usuario" id="labelUsuario">Nome de usuário</label>
-        <input type="text" id="usuario" name="usuario">
+    <form id="cadastro">
+        <label class="label" for="cadastroUsuario" id="labelCadastroUsuario">Nome de usuário</label>
+        <input class="input" type="text" id="cadastroUsuario" name="cadastroUsuario">
 
-        <label for="senha" id="labelSenha">Senha</label>
-        <input type="text" id="senha" name="senha">
+        <label class="label" for="cadastroSenha" id="labelCadastroSenha">Senha</label>
+        <input class="input" type="text" id="cadastroSenha" name="cadastroSenha">
+        
+        <button id="buttonCadastrar">Cadastrar</button>
+    </form>
+
+    <form id="principal">
+        <label class="label" for="usuario" id="labelUsuario">Nome de usuário</label>
+        <input class="input" type="text" id="usuario" name="usuario">
+
+        <label class="label" for="senha" id="labelSenha">Senha</label>
+        <input class="input" type="text" id="senha" name="senha">
         
         <button id="buttonEnviar">Entrar</button>
-        <button id="buttonCadastrar">Cadastar</button>
+        
     </form>
+
     <script src="index.js"></script>
 
 </body>
