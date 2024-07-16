@@ -2,6 +2,11 @@ import sqlalchemy
 from sqlalchemy.orm import declarative_base, Session
 from sqlalchemy import Column, String, Integer, ForeignKey
 
+from flask import Flask, render_template, request #Flask é a classe que cria a aplicação web. render_template é uma função que renderiza arquivos HTML e request é um objeto que contém os dados das requisições HTTP.
+
+app = Flask(__name__)
+
+
 Base = declarative_base() # Base = estrutura modelo que vai ser utilizada para criar as classes da aplicação
                             # declarative_base: É uma função que retorna uma classe base especial do SQLAlchemy chamada DeclarativeMeta. Esta classe base é utilizada para criar classes de mapeamento de objetos (ORM) que representam tabelas no banco de dados. Ela permite definir estruturas de dados Python que são automaticamente mapeadas para tabelas no banco de dados, facilitando a interação entre objetos Python e dados persistidos em um banco de dados relacional.
 
